@@ -1,5 +1,8 @@
 import p5 from 'p5'
-import { ngon, line } from '~/shapes'
+import { ngon, line, box } from '~/shapes'
+
+import SoundRepository from '~/repositories/soundRepository'
+const repository = new SoundRepository()
 
 const sketch = (p: p5) => {
     p.preload = () => {
@@ -17,12 +20,48 @@ const sketch = (p: p5) => {
         p.rotateZ(p.frameCount * 0.01)
 
         p.stroke('purple')
-        p.point(30, 20)
-        p.point(85, 20)
 
+        ngon(p, 
+            0, 
+            0, 
+            repository.getParam3()
+        )
 
-        ngon(p, 0, 0, 80)
-        line(p, 5)
+        ngon(p, 
+            10, 
+            10, 
+            repository.getParam6()
+        )
+
+        ngon(p, 
+            10, 
+            10, 
+            repository.getParam5()
+        )
+
+        p.stroke('yellow')
+        line(p, 
+            repository.getParam1(),
+            repository.getParam2(),
+            repository.getParam3(),
+            repository.getParam4()
+        )
+
+        line(p, 
+            repository.getParam4(),
+            repository.getParam3(),
+            repository.getParam2(),
+            repository.getParam1()
+        )
+
+        p.stroke('red')
+        box(p, 
+            repository.getParam4(),
+            repository.getParam3(),
+            repository.getParam2(),
+            repository.getParam1(),
+            repository.getParam1()
+        )
     }
 
 }
